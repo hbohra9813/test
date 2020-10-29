@@ -16,13 +16,9 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2018-09-01-preview",
       "name": "[guid(subscription().Id)]",
-      "dependsOn": [
-                "[resourceId('Microsoft.Authorization/policyAssignments/', parameters('policyAssignmentName'))]",
-                 
-      ],
       "properties": {
         "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'fb1c8493-542b-48eb-b624-b4c8fea62acd')]",
-         "principalId": "[if(not(empty(resourceId('Microsoft.Authorization/policyAssignments/', parameters('policyAssignmentName')))),reference(concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/policyAssignments/',parameters('policyAssignmentName')),'2019-09-01','Full').identity.principalId,json('null'))]"
+         "principalId": "[if(not(empty(concat('Microsoft.Authorization/policyAssignments/', parameters('policyAssignmentName')))),reference(concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/policyAssignments/',parameters('policyAssignmentName')),'2019-09-01','Full').identity.principalId,json('null'))]"
    }
     }
   ]
